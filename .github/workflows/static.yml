@@ -8,7 +8,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
 
         body {
-            background: url('https://i.pinimg.com/originals/08/99/25/089925e966f5519470b8089a5a8e5f8a.jpg') repeat;
+            background: url('/modified_image.jpeg') repeat;
             background-size: cover;
             background-attachment: fixed;
             font-family: 'Sacramento', cursive;
