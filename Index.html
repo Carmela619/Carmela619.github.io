@@ -3,174 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carmela's Service's</title>
+    <title>Carmela's Rapidline</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
 
+        /* --- BASE STYLES --- */
         body {
-            background: url('./modified_image.jpeg') repeat;
+            background: url('https://i.pinimg.com/originals/08/99/25/089925e966f5519470b8089a5a8e5f8a.jpg') no-repeat center center fixed;
             background-size: cover;
-            background-attachment: fixed;
             font-family: 'Sacramento', cursive;
             color: #fff;
             text-align: center;
             padding: 0;
             margin: 0;
-            /* Changed from hidden to allow scrolling for shop items */
-            overflow-x: hidden; 
-            cursor: url('https://cur.cursors-4u.net/nature/nat-10/nat962.png'), auto;
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-color: #000;
         }
 
+        /* --- FALLING STAR STYLE --- */
+        .star {
+            position: fixed;
+            top: -10px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff, 0 0 20px #ff69b4;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh); }
+        }
+
+        /* --- HEADER & TITLES --- */
         header {
-            padding: 40px 20px;
-            background: rgba(255, 105, 180, 0.9);
-            font-size: 3.5em;
-            text-shadow: 3px 3px #ff1493;
+            padding: 40px 10px;
+            font-size: clamp(3.5rem, 12vw, 5.5rem);
+            font-weight: bold;
+            position: relative;
+            z-index: 10;
+            background: linear-gradient(
+                to right, 
+                #ff69b4 0%, #fff 10%, #ff69b4 20%, #fff 30%, 
+                #ff1493 40%, #fff 50%, #ff69b4 60%, #fff 70%, 
+                #ff1493 80%, #fff 90%, #ff69b4 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: intense-sparkle 1.5s linear infinite;
         }
 
+        @keyframes intense-sparkle {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Make all text pop against the background */
+        h2, h3, p, nav a, .btn {
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 1), 0px 0px 5px rgba(0, 0, 0, 0.8);
+        }
+
+        h2 { font-size: clamp(3rem, 10vw, 4.5rem); margin-bottom: 10px; }
+
+        .sparkle-sub {
+            display: block;
+            font-size: 0.45em;
+            -webkit-text-fill-color: #fff;
+            text-shadow: 0 0 5px #fff, 0 0 15px #ff1493;
+            letter-spacing: 2px;
+        }
+
+        /* --- NAVIGATION --- */
         nav {
             display: flex;
             justify-content: center;
-            background-color: rgba(255, 133, 193, 0.9);
+            background-color: rgba(255, 133, 193, 0.85);
             padding: 15px;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        nav a {
-            text-decoration: none;
-            color: white;
-            margin: 0 20px;
-            font-size: 1.8em;
-            transition: color 0.3s;
+        nav a { 
+            text-decoration: none; 
+            color: white; 
+            margin: 0 15px; 
+            font-size: 1.8rem; /* Increased for cursive clarity */
         }
 
-        /* Section Styling */
-        section {
-            padding: 60px 20px;
-            background: rgba(0, 0, 0, 0.3); /* Slight dark overlay for readability */
+        /* --- CONTENT --- */
+        .container { 
+            max-width: 90%; 
+            width: 1000px; 
+            margin: 0 auto; 
+            position: relative; 
+            z-index: 5; 
+        }
+
+        section { 
+            padding: 40px 20px; 
+            background: transparent; 
+            margin: 30px 0; 
+            border-radius: 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        p {
+            font-size: 1.8rem; /* Larger font for cursive readability */
+            line-height: 1.4;
             margin: 20px 0;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
+        .ride-attraction {
+            border: 3px solid #fff;
+            box-shadow: 0 0 20px #ff1493;
+            background: rgba(255, 20, 147, 0.1);
         }
 
-        /* Merchandise Grid */
-        .shop-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
+        .btn {
+            padding: 10px 35px;
+            background: #fff;
+            color: #ff1493;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.6rem;
+            font-family: 'Sacramento', cursive;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 15px #fff;
+            transition: 0.3s;
+            margin-top: 15px;
+            text-decoration: none;
+            display: inline-block;
+            text-shadow: none; /* Keep button text clean */
         }
+
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 30px #fff; }
 
         .product-card {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 20px;
-            border-radius: 20px;
-            backdrop-filter: blur(5px);
-            border: 2px solid #ff69b4;
-        }
-
-        .product-card img {
-            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
             border-radius: 15px;
-            margin-bottom: 10px;
-        }
-
-        .price {
-            font-size: 1.5em;
-            color: #fff;
-            display: block;
-            margin: 10px 0;
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 10px 25px;
-            background: linear-gradient(45deg, #ff1493, #ff69b4);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: transform 0.3s;
-            box-shadow: 0px 0px 10px rgba(255, 20, 147, 0.5);
-        }
-
-        .btn:hover {
-            transform: scale(1.1);
-        }
-
-        footer {
-            padding: 20px;
-            background: rgba(255, 133, 193, 0.9);
-            font-size: 1.4em;
+            border: 1px solid #ff69b4;
         }
     </style>
 </head>
 <body>
-    <header>Carmela's Rapidline</header>
+
+    <header>
+        Carmela's Rapidline
+        <span class="sparkle-sub">Fueling the Sparkle</span>
+    </header>
 
     <nav>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
+        <a href="#fast-rides">Service</a>
         <a href="#shop">Shop</a>
-        <a href="#contact">Contact</a>
+        <a href="#donate">Support</a>
     </nav>
 
     <main class="container">
-        <section id="about">
-            <h1>Welcome to my World</h1>
-            <p>Providing premium personal services and exclusive merchandise designed with love.</p>
+        <section id="fast-rides" class="ride-attraction">
+            <h2>Fast Ride Service ⚡</h2>
+            <p>Need to be there in a flash? Experience ultimate speed & attraction.</p>
+            <button class="btn">Book Now</button>
         </section>
 
         <section id="services">
-            <h2>Personal Services</h2>
-            <div class="product-card">
-                <h3>One-on-One Consultation</h3>
-                <p>Personalized sessions tailored to your needs. Let's create something magical together.</p>
-                <button class="btn">Book a Session</button>
-            </div>
+            <h2>One-on-One Consultation</h2>
+            <p>
+                Just tell me what you need this is Uber 4us by us, just click here well get what you need where you need it 💋<br><br>
+                <strong>Include All Info To Be Contacted Back A$AP</strong>
+            </p>
+            <a href="mailto:Donraa69@proton.me?subject=Inquiry" class="btn">Details</a>
         </section>
 
         <section id="shop">
-            <h2>Official Merchandise</h2>
-            <div class="shop-grid">
-                <div class="product-card">
-                    <img src="https://via.placeholder.com/200" alt="Merch 1">
-                    <h3>Angel Hoodie</h3>
-                    <span class="price">$45.00</span>
-                    <button class="btn">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <img src="https://via.placeholder.com/200" alt="Merch 2">
-                    <h3>Signature Cap</h3>
-                    <span class="price">$25.00</span>
-                    <button class="btn">Add to Cart</button>
-                </div>
+            <h2>Shop</h2>
+            <div id="product-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <p>💋 Swag & Gear Coming Soon 💋</p>
             </div>
         </section>
 
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Get in touch for inquiries about services and merchandise.</p>
+        <section id="donate" style="border: 2px dashed #ff69b4;">
+            <h2>💖 Support the Journey</h2>
+            <p>If you love the speed and the sparks, help keep the engine running!</p>
+            <a href="https://cash.app/$Carmela619" target="_blank" class="btn">Donate Now</a>
         </section>
     </main>
 
-    <footer>
-    If your sick of late orders, being late for work, generally just wanna get somewhere fast Carmela! is here. All Rights Reserved
-    </footer>
-
     <script>
-        function applySparkleEffect(element) {
-            if(!element) return;
-            element.innerHTML = element.innerHTML.replace(/s/g, '<span style="color:#ffe6f9;">s</span>')
-                                                 .replace(/S/g, '<span style="color:#ffe6f9;">S</span>');
+        // Stars restored
+        function createStar() {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            const size = Math.random() * 3 + 2 + 'px';
+            star.style.width = size;
+            star.style.height = size;
+            star.style.left = Math.random() * 100 + 'vw';
+            const duration = Math.random() * 3 + 3 + 's';
+            star.style.animationDuration = duration;
+            document.body.appendChild(star);
+            setTimeout(() => { star.remove(); }, 6000);
         }
-        applySparkleEffect(document.querySelector("footer"));
-    </script>
+        setInterval(createStar, 400);
+
+        // Shop Loader restored
+        async function loadGitHubShop() {
+            const githubUrl = 'https://raw.githubusercontent.com/Carmela619/Carmela619/main/products.json'; 
+            const container = document.getElementById('product-list');
+
+            try {
+                const response = await fetch(githubUrl);
+                const products = await response.json();
+                container.innerHTML = ''; 
+                products.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" style="width:100%; border-radius:15px;">
+                        <h3>${item.name}</h3>
+                        <p style="color: #ff69b4;">${item.price}</p>
+                        <a href="${item.link}" target="_blank" class="btn">Buy Now</a>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                console.log("No shop data yet.");
+            }
+        }
+        loadGitHubShop();
+    </script> 
 </body>
 </html>
