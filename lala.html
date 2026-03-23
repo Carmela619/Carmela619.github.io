@@ -5,13 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carmela's Rapidline</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+        /* NOTE: Marigny is a premium font. 
+           If you have the files, uncomment the @font-face block below 
+           and ensure the 'src' points to your actual font files.
+        */
+        /*
+        @font-face {
+            font-family: 'Marigny';
+            src: url('marigny-bold-italic.woff2') format('woff2');
+            font-weight: bold;
+            font-style: italic;
+        }
+        */
 
         /* --- BASE STYLES --- */
         body {
-            /* Black base allows the transparent image to look dark/faint */
             background-color: #000;
-            font-family: 'Sacramento', cursive;
+            /* Updated to Marigny Bold Italic */
+            font-family: 'Marigny', sans-serif; 
+            font-weight: bold;
+            font-style: italic;
             color: #fff;
             text-align: center;
             padding: 0;
@@ -31,7 +44,6 @@
             height: 100%;
             background: url('https://i.pinimg.com/originals/08/99/25/089925e966f5519470b8089a5a8e5f8a.jpg') no-repeat center center fixed;
             background-size: cover;
-            /* Adjust this value (0.1 to 0.9) to change visibility */
             opacity: 0.2; 
             z-index: -1; 
             pointer-events: none;
@@ -56,7 +68,7 @@
         /* --- HEADER & TITLES --- */
         header {
             padding: 40px 10px;
-            font-size: clamp(3.5rem, 12vw, 5.5rem);
+            font-size: clamp(3rem, 10vw, 5rem);
             font-weight: bold;
             position: relative;
             z-index: 10;
@@ -81,7 +93,7 @@
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 1), 0px 0px 5px rgba(0, 0, 0, 0.8);
         }
 
-        h2 { font-size: clamp(3rem, 10vw, 4.5rem); margin-bottom: 10px; }
+        h2 { font-size: clamp(2.5rem, 8vw, 3.5rem); margin-bottom: 10px; }
 
         .sparkle-sub {
             display: block;
@@ -106,7 +118,7 @@
             text-decoration: none; 
             color: white; 
             margin: 0 15px; 
-            font-size: 1.8rem; 
+            font-size: 1.4rem; 
         }
 
         /* --- CONTENT --- */
@@ -127,7 +139,7 @@
         }
 
         p {
-            font-size: 1.8rem; 
+            font-size: 1.4rem; 
             line-height: 1.4;
             margin: 20px 0;
         }
@@ -139,14 +151,16 @@
         }
 
         .btn {
-            padding: 10px 35px;
+            padding: 12px 35px;
             background: #fff;
             color: #ff1493;
             border: none;
             border-radius: 50px;
-            font-size: 1.6rem;
-            font-family: 'Sacramento', cursive;
+            font-size: 1.3rem;
+            /* Removed Sacramento override to use Marigny from body */
+            font-family: inherit; 
             font-weight: bold;
+            font-style: italic;
             cursor: pointer;
             box-shadow: 0 0 15px #fff;
             transition: 0.3s;
