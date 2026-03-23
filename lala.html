@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carmela's Rapidline</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Sacramento&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
 
         /* --- BASE STYLES --- */
         body {
             background: url('https://i.pinimg.com/originals/08/99/25/089925e966f5519470b8089a5a8e5f8a.jpg') no-repeat center center fixed;
             background-size: cover;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Sacramento', cursive;
             color: #fff;
             text-align: center;
             padding: 0;
@@ -29,7 +29,7 @@
             border-radius: 50%;
             box-shadow: 0 0 10px #fff, 0 0 20px #ff69b4;
             pointer-events: none;
-            z-index: 1; /* Sit above the background */
+            z-index: 1;
             animation: fall linear forwards;
         }
 
@@ -41,7 +41,6 @@
         header {
             padding: 40px 10px;
             font-size: clamp(3.5rem, 12vw, 5.5rem);
-            font-family: 'Sacramento', cursive;
             font-weight: bold;
             position: relative;
             z-index: 10;
@@ -62,9 +61,8 @@
             100% { background-position: 200% center; }
         }
 
-        h2, h3, .sparkle-sub {
-            font-family: 'Sacramento', cursive;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
+        h2, h3, p, nav a {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 1);
         }
 
         .sparkle-sub {
@@ -90,8 +88,7 @@
             text-decoration: none; 
             color: white; 
             margin: 0 15px; 
-            font-size: 1.2rem; 
-            font-weight: 600;
+            font-size: 1.8rem;
         }
 
         /* --- CONTENT --- */
@@ -105,33 +102,35 @@
 
         section { 
             padding: 40px 20px; 
-            background: transparent; /* Background image is now 100% visible */
+            /* Added 50% transparency back for readability */
+            background: rgba(0, 0, 0, 0.5); 
             margin: 30px 0; 
             border-radius: 20px; 
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            /* This blurs the background slightly for a cool "frosted glass" look */
+            backdrop-filter: blur(4px);
         }
 
         p {
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
-            font-size: 1.2rem;
-            line-height: 1.6;
+            font-size: 1.8rem;
+            line-height: 1.4;
         }
 
         .ride-attraction {
             border: 3px solid #fff;
             box-shadow: 0 0 20px #ff1493;
-            background: rgba(255, 20, 147, 0.1);
+            background: rgba(255, 20, 147, 0.2);
         }
 
         .btn {
-            padding: 12px 35px;
+            padding: 10px 35px;
             background: #fff;
             color: #ff1493;
             border: none;
             border-radius: 50px;
-            font-size: 1rem;
+            font-size: 1.6rem;
+            font-family: 'Sacramento', cursive;
             font-weight: bold;
-            font-family: 'Montserrat', sans-serif;
             cursor: pointer;
             box-shadow: 0 0 15px #fff;
             transition: 0.3s;
@@ -143,7 +142,7 @@
         .btn:hover { transform: scale(1.05); box-shadow: 0 0 30px #fff; }
 
         .product-card {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.6);
             padding: 15px;
             border-radius: 15px;
             border: 1px solid #ff69b4;
@@ -167,7 +166,7 @@
         <section id="fast-rides" class="ride-attraction">
             <h2>Fast Ride Service ⚡</h2>
             <p>Need to be there in a flash? Experience ultimate speed & attraction.</p>
-            <button class="btn">BOOK NOW</button>
+            <button class="btn">Book Now</button>
         </section>
 
         <section id="services">
@@ -176,7 +175,7 @@
                 Just tell me what you need this is Uber 4us by us, just click here well get what you need where you need it 💋<br><br>
                 <strong>Include All Info To Be Contacted Back A$AP</strong>
             </p>
-            <a href="mailto:Donraa69@proton.me?subject=Consultation%20Inquiry" class="btn">Details</a>
+            <a href="mailto:Donraa69@proton.me?subject=Inquiry" class="btn">Details</a>
         </section>
 
         <section id="shop">
@@ -187,14 +186,13 @@
         </section>
 
         <section id="donate" style="border: 2px dashed #ff69b4;">
-            <h2 style="font-size: 3rem;">💖 Support the Journey</h2>
+            <h2>💖 Support the Journey</h2>
             <p>If you love the speed and the sparks, help keep the engine running!</p>
-            <a href="https://cash.app/$Carmela619" target="_blank" class="btn">DONATE NOW</a>
+            <a href="https://cash.app/$Carmela619" target="_blank" class="btn">Donate Now</a>
         </section>
     </main>
 
     <script>
-        // --- 1. Falling Stars Effect ---
         function createStar() {
             const star = document.createElement('div');
             star.classList.add('star');
@@ -209,35 +207,26 @@
         }
         setInterval(createStar, 400);
 
-        // --- 2. GitHub Shop Loader ---
         async function loadGitHubShop() {
             const githubUrl = 'https://raw.githubusercontent.com/Carmela619/Carmela619/main/products.json'; 
             const container = document.getElementById('product-list');
-
             try {
                 const response = await fetch(githubUrl);
-                if (!response.ok) throw new Error('Not found');
                 const products = await response.json();
-
                 container.innerHTML = ''; 
-
                 products.forEach(item => {
                     const card = document.createElement('div');
                     card.className = 'product-card';
                     card.innerHTML = `
                         <img src="${item.image}" alt="${item.name}" style="width:100%; border-radius:15px;">
                         <h3>${item.name}</h3>
-                        <p style="color: #ff69b4; font-weight: bold;">${item.price}</p>
+                        <p style="color: #ff69b4;">${item.price}</p>
                         <a href="${item.link}" target="_blank" class="btn">Buy Now</a>
                     `;
                     container.appendChild(card);
                 });
-            } catch (error) {
-                // If no file is found yet, it stays on the "Coming Soon" message
-                console.log("Shop JSON not found yet. Using placeholder.");
-            }
+            } catch (error) { console.log("Shop setup pending."); }
         }
-
         loadGitHubShop();
     </script> 
 </body>
