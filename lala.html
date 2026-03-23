@@ -9,8 +9,8 @@
 
         /* --- BASE STYLES --- */
         body {
-            background: url('https://i.pinimg.com/originals/08/99/25/089925e966f5519470b8089a5a8e5f8a.jpg') no-repeat center center fixed;
-            background-size: cover;
+            /* Black base allows the transparent image to look dark/faint */
+            background-color: #000;
             font-family: 'Sacramento', cursive;
             color: #fff;
             text-align: center;
@@ -18,7 +18,23 @@
             margin: 0;
             overflow-x: hidden;
             min-height: 100vh;
-            background-color: #000;
+            position: relative;
+        }
+
+        /* --- TRANSPARENT BACKGROUND LAYER --- */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.pinimg.com/originals/08/99/25/089925e966f5519470b8089a5a8e5f8a.jpg') no-repeat center center fixed;
+            background-size: cover;
+            /* Adjust this value (0.1 to 0.9) to change visibility */
+            opacity: 0.2; 
+            z-index: -1; 
+            pointer-events: none;
         }
 
         /* --- FALLING STAR STYLE --- */
@@ -61,9 +77,11 @@
             100% { background-position: 200% center; }
         }
 
-        h2, h3, p, nav a {
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 1);
+        h2, h3, p, nav a, .btn {
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 1), 0px 0px 5px rgba(0, 0, 0, 0.8);
         }
+
+        h2 { font-size: clamp(3rem, 10vw, 4.5rem); margin-bottom: 10px; }
 
         .sparkle-sub {
             display: block;
@@ -88,7 +106,7 @@
             text-decoration: none; 
             color: white; 
             margin: 0 15px; 
-            font-size: 1.8rem;
+            font-size: 1.8rem; 
         }
 
         /* --- CONTENT --- */
@@ -102,18 +120,16 @@
 
         section { 
             padding: 40px 20px; 
-            /* Added 50% transparency back for readability */
-            background: rgba(0, 0, 0, 0.5); 
+            background: rgba(0, 0, 0, 0.4); 
             margin: 30px 0; 
             border-radius: 20px; 
             border: 1px solid rgba(255, 255, 255, 0.2);
-            /* This blurs the background slightly for a cool "frosted glass" look */
-            backdrop-filter: blur(4px);
         }
 
         p {
-            font-size: 1.8rem;
+            font-size: 1.8rem; 
             line-height: 1.4;
+            margin: 20px 0;
         }
 
         .ride-attraction {
@@ -137,6 +153,7 @@
             margin-top: 15px;
             text-decoration: none;
             display: inline-block;
+            text-shadow: none; 
         }
 
         .btn:hover { transform: scale(1.05); box-shadow: 0 0 30px #fff; }
@@ -205,7 +222,32 @@
             document.body.appendChild(star);
             setTimeout(() => { star.remove(); }, 6000);
         }
-        setInterval(createStar,
+        setInterval(createStar, 400);
+
+        async function loadGitHubShop() {
+            const githubUrl = 'https://raw.githubusercontent.com/Carmela619/Carmela619/main/products.json'; 
+            const container = document.getElementById('product-list');
+
+            try {
+                const response = await fetch(githubUrl);
+                const products = await response.json();
+                container.innerHTML = ''; 
+                products.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" style="width:100%; border-radius:15px;">
+                        <h3>${item.name}</h3>
+                        <p style="color: #ff69b4;">${item.price}</p>
+                        <a href="${item.link}" target="_blank" class="btn">Buy Now</a>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                console.log("No shop data yet.");
+            }
+        }
+        loadGitHubShop();
     </script> 
 </body>
 </html>
