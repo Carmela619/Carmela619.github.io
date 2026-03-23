@@ -205,29 +205,7 @@
             document.body.appendChild(star);
             setTimeout(() => { star.remove(); }, 6000);
         }
-        setInterval(createStar, 400);
-
-        async function loadGitHubShop() {
-            const githubUrl = 'https://raw.githubusercontent.com/Carmela619/Carmela619/main/products.json'; 
-            const container = document.getElementById('product-list');
-            try {
-                const response = await fetch(githubUrl);
-                const products = await response.json();
-                container.innerHTML = ''; 
-                products.forEach(item => {
-                    const card = document.createElement('div');
-                    card.className = 'product-card';
-                    card.innerHTML = `
-                        <img src="${item.image}" alt="${item.name}" style="width:100%; border-radius:15px;">
-                        <h3>${item.name}</h3>
-                        <p style="color: #ff69b4;">${item.price}</p>
-                        <a href="${item.link}" target="_blank" class="btn">Buy Now</a>
-                    `;
-                    container.appendChild(card);
-                });
-            } catch (error) { console.log("Shop setup pending."); }
-        }
-        loadGitHubShop();
+        setInterval(createStar,
     </script> 
 </body>
 </html>
